@@ -703,117 +703,130 @@ function ParallelCoordinates(data,options) {
 
 	}
 	
-	this.loadData=function(quarter) {
-		if(!!quarter.date.getTime) {
-			quarter="q"+(Math.floor((quarter.date.getMonth()+1)/3)+1)+"-"+quarter.date.getFullYear();
+	this.loadData=function(year) {
+		if(!year) {
+			quarter="2014";//default
 		}
+		
+		d3.csv("data/PlayerStat"+year+".csv",function(d){
+			
+			d["Round"]= d["Round"];
+			d["name_lc"]=d["Name"].toLowerCase();
 
-		var unknonw=[];
-
-		d3.csv(options.path+quarter+"."+options.extension+"?"+(new Date()).getTime(),function(q){
-			
-			q.matches=q.matches;
-			q.events=q.events;
-			
-			q.round=options.programming_languages[q.player_name.toLowerCase()] || 1970;
-			
-			return q;
+			return d;
 
 		},function(data){
 
-			var events={};
-			data.forEach(function(d){
-
-				if(!events[d["player_name"]]) {
-					events[d["player_name"]]={
-						player_name:d["player_name"]
-					};
-				}
-				switch(d["type"]) {
-					case "WinEvent":
-						events[d["player_name"]]["MatchesPlayed"]=d["matches"];
-						events[d["player_name"]]["TotalPointsWon"]=d["events"];
-						events[d["player_name"]][d["type"]]=d["events"]/d["matches"];
-					break;
-					default:
-						events[d["player_name"]][d["type"]]=d["events"]/d["matches"];
-					break;
-				}
-				
-				events[d["player_name"]].round=d.round;
-				
+			var players={};
+			data.forEach(function(lang){
+				players[lang["name_lc"]]=lang["Round"];
 			});
-			
-
-			nested_data=nestData(d3.values(events));
-
-			
-
-			var languages=languages_group.selectAll("g.lang")
-					.data(nested_data,function(d){
-						return d.key;
-					})
-					.classed("new",false);
+		
+			var unknonw=[];
+	
+			d3.csv("data/AUSOpen"+year+".csv",function(q){
+				
+				q.matches=q.matches;
+				q.events=q.events;
+				q.round=players[q.player_name.toLowerCase()] || 1;
+				
+				return q;
+	
+			},function(data){
+	
+				var events={};
+				data.forEach(function(d){
+	
+					if(!events[d["player_name"]]) {
+						events[d["player_name"]]={
+							player_name:d["player_name"]
+						};
+					}
+					switch(d["type"]) {
+						case "WinEvent":
+							events[d["player_name"]]["MatchesPlayed"]=d["matches"];
+							events[d["player_name"]]["TotalPointsWon"]=d["events"];
+							events[d["player_name"]][d["type"]]=d["events"]/d["matches"];
+						break;
+						default:
+							events[d["player_name"]][d["type"]]=d["events"]/d["matches"];
+						break;
+					}
 					
-
-			languages
-				.exit()
-				.remove();
-
-			languages
-				.enter()
-				.append("g")
-					.attr("class","lang")
-					.classed("new",true)
-					.attr("rel",function(d){
-						return d.key;
-					})
-					.call(createLanguages);
-
-			var labels=labels_group.selectAll("g.labels")
-					.data(nested_data,function(d){
-						return d.key;
-					})
-					.attr("rel",function(d){
-						return d.key;
-					});
-
-			labels
-				.exit()
-				.remove();
-
-			labels
-				.enter()
-				.append("g")
-					.attr("class","labels")
-					.classed("new",true)
-					.attr("rel",function(d){
-						return d.key;
-					})
-					.on("click",function(d){
-						var $this=d3.select(this);
-						$this.classed("highlight",!($this.classed("highlight")));
-						languages_group
-							.selectAll("g.lang[rel='"+d.key+"']")
-							.classed("highlight",$this.classed("highlight"));
-					})
-					.on("mouseover",function(d){
-						d3.select(this).classed("hover",true);
-						languages_group
-							.selectAll("g.lang[rel='"+d.key+"']")
-							.classed("hover",true);
-					})
-					.on("mouseout",function(d){
-						svg.selectAll("g.hover,g.year")
-								.classed("hover",false)
-								.classed("year",false);
-					});
-			
-			self.update();
-
+					events[d["player_name"]].round=d.round;
+					
+				});
+				
+	
+				nested_data=nestData(d3.values(events));
+	
+				
+	
+				var languages=languages_group.selectAll("g.lang")
+						.data(nested_data,function(d){
+							return d.key;
+						})
+						.classed("new",false);
+						
+	
+				languages
+					.exit()
+					.remove();
+	
+				languages
+					.enter()
+					.append("g")
+						.attr("class","lang")
+						.classed("new",true)
+						.attr("rel",function(d){
+							return d.key;
+						})
+						.call(createLanguages);
+	
+				var labels=labels_group.selectAll("g.labels")
+						.data(nested_data,function(d){
+							return d.key;
+						})
+						.attr("rel",function(d){
+							return d.key;
+						});
+	
+				labels
+					.exit()
+					.remove();
+	
+				labels
+					.enter()
+					.append("g")
+						.attr("class","labels")
+						.classed("new",true)
+						.attr("rel",function(d){
+							return d.key;
+						})
+						.on("click",function(d){
+							var $this=d3.select(this);
+							$this.classed("highlight",!($this.classed("highlight")));
+							languages_group
+								.selectAll("g.lang[rel='"+d.key+"']")
+								.classed("highlight",$this.classed("highlight"));
+						})
+						.on("mouseover",function(d){
+							d3.select(this).classed("hover",true);
+							languages_group
+								.selectAll("g.lang[rel='"+d.key+"']")
+								.classed("hover",true);
+						})
+						.on("mouseout",function(d){
+							svg.selectAll("g.hover,g.year")
+									.classed("hover",false)
+									.classed("year",false);
+						});
+				
+				self.update();
+	
+			});
 		});
-
-	};
+	};//end of load data
 
 	this.update=function(__options) {
 

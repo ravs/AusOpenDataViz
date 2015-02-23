@@ -1,4 +1,4 @@
-d3.csv("data/player2009.csv",function(d){
+d3.csv("data/PlayerStat2014.csv",function(d){
 			
 	d["Round"]= d["Round"];
 	d["name_lc"]=d["Name"].toLowerCase();
@@ -14,7 +14,7 @@ d3.csv("data/player2009.csv",function(d){
 
 	var unknonw=[];
 
-	d3.csv("data/AUS2009.csv",function(q){
+	d3.csv("data/AUSOpen2014.csv",function(q){
 		
 		q.matches=q.matches;
 		q.events=q.events;
@@ -105,3 +105,51 @@ d3.csv("data/player2009.csv",function(d){
 		});
 	});
 });
+
+var currentYear = 2014;
+
+function nextYear() {
+	if (!currentYear) {
+		$(".pager li:first-child").removeClass("disabled");
+		$(".pager li:last-child").addClass("disabled");
+		pc.loadData("2014");
+		currentYear = 2014;
+	}
+	currentYear += 1;
+	if (currentYear === 2014 || currentYear > 2014) {
+		if (currentYear > 2014) {
+			currentYear = 2014;
+		}
+		$(".pager li:first-child").removeClass("disabled");
+		$(".pager li:last-child").addClass("disabled");
+		pc.loadData(currentYear.toString());
+	} else {
+		$(".pager li:first-child").removeClass("disabled");
+		$(".pager li:last-child").removeClass("disabled");
+		pc.loadData(currentYear.toString());
+	}
+	$("#current-year-label").text(currentYear.toString());
+}
+
+function previousYear() {
+	if (!currentYear) {
+		$(".pager li:first-child").removeClass("disabled");
+		$(".pager li:last-child").addClass("disabled");
+		pc.loadData("2014");
+		currentYear = 2014;
+	}
+	currentYear -= 1;
+	if (currentYear === 2004 || currentYear < 2004) {
+		if (currentYear < 2004) {
+			currentYear = 2004;
+		}
+		$(".pager li:first-child").addClass("disabled");
+		$(".pager li:last-child").removeClass("disabled");
+		pc.loadData(currentYear.toString());
+	} else {
+		$(".pager li:first-child").removeClass("disabled");
+		$(".pager li:last-child").removeClass("disabled");
+		pc.loadData(currentYear.toString());
+	}
+	$("#current-year-label").text(currentYear.toString());
+}

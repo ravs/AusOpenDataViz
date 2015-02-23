@@ -31,7 +31,11 @@ a:hover {
 #header {
 	width:100%;
 	min-width: 960px;
+<<<<<<< HEAD
 	margin:0 auto 50px;
+=======
+	margin:0 auto 20px;
+>>>>>>> gh-pages
 	padding-bottom:5px;
 	position: relative;
 	background-color: #3498db;

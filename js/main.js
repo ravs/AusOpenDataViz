@@ -1,4 +1,4 @@
-d3.csv("data/player2009.csv",function(d){
+d3.csv("data/PlayerStat2014.csv",function(d){
 			
 	d["Round"]= d["Round"];
 	d["name_lc"]=d["Name"].toLowerCase();
@@ -14,7 +14,7 @@ d3.csv("data/player2009.csv",function(d){
 
 	var unknonw=[];
 
-	d3.csv("data/AUS2009.csv",function(q){
+	d3.csv("data/AUSOpen2014.csv",function(q){
 		
 		q.matches=q.matches;
 		q.events=q.events;
@@ -104,65 +104,52 @@ d3.csv("data/player2009.csv",function(d){
 			extension:"csv"
 		});
 	});
-
-//	d3.csv("active_quarters.csv",function(d){
-//
-//		d.active_repos_by_url=+d.active_repos_by_url;
-//		d.date=new Date(d.year,((+d.quarter)*3-3),1)
-//
-//		return d;
-//	},function(data){
-//
-//		var extents={
-//			date:[
-//				new Date(2012,3,1),
-//				new Date(2014,9,1)
-//			]
-//		};
-//
-//		var sums={};
-//		data.filter(function(d){
-//			return d.repository_language!="null"
-//		}).forEach(function(d){
-//			if(!sums[d.repository_language]) {
-//				sums[d.repository_language]=d3.sum(data.filter(function(l){
-//					return l.repository_language==d.repository_language && ((l.date>=extents.date[0]) && (l.date<=extents.date[1]))
-//				}),function(d){
-//					return d.active_repos_by_url
-//				})
-//			}
-//		})
-//		
-//		
-//		var sums_quarter={};
-//		data.forEach(function(d){
-//			if(!sums_quarter[d.year+"-"+d.quarter]) {
-//				sums_quarter[d.year+"-"+d.quarter]=d3.sum(data.filter(function(l){
-//					return d.year+"-"+d.quarter==l.year+"-"+l.quarter
-//				}),function(d){
-//					return d.active_repos_by_url
-//				})
-//			}	
-//		})
-//		
-//		qc=new LineChart(d3.entries(sums_quarter).map(function(d){
-//			var date=d.key.split("-")
-//			return {
-//				date:new Date(date[0],((+date[1])*3-3),1),
-//				d:date,
-//				value:d.value
-//			}
-//		}).sort(function(a,b){
-//			return d3.ascending(a.date,b.date)
-//		}),{
-//			container:"#qc",
-//			extents:extents,
-//			selector:"#timeselect",
-//			callback:function(d){
-//				pc.loadData(d);
-//			}
-//		});
-//	});
-
-		
 });
+
+var currentYear = 2014;
+
+function nextYear() {
+	if (!currentYear) {
+		$(".pager li:first-child").removeClass("disabled");
+		$(".pager li:last-child").addClass("disabled");
+		pc.loadData("2014");
+		currentYear = 2014;
+	}
+	currentYear += 1;
+	if (currentYear === 2014 || currentYear > 2014) {
+		if (currentYear > 2014) {
+			currentYear = 2014;
+		}
+		$(".pager li:first-child").removeClass("disabled");
+		$(".pager li:last-child").addClass("disabled");
+		pc.loadData(currentYear.toString());
+	} else {
+		$(".pager li:first-child").removeClass("disabled");
+		$(".pager li:last-child").removeClass("disabled");
+		pc.loadData(currentYear.toString());
+	}
+	$("#current-year-label").text(currentYear.toString());
+}
+
+function previousYear() {
+	if (!currentYear) {
+		$(".pager li:first-child").removeClass("disabled");
+		$(".pager li:last-child").addClass("disabled");
+		pc.loadData("2014");
+		currentYear = 2014;
+	}
+	currentYear -= 1;
+	if (currentYear === 2004 || currentYear < 2004) {
+		if (currentYear < 2004) {
+			currentYear = 2004;
+		}
+		$(".pager li:first-child").addClass("disabled");
+		$(".pager li:last-child").removeClass("disabled");
+		pc.loadData(currentYear.toString());
+	} else {
+		$(".pager li:first-child").removeClass("disabled");
+		$(".pager li:last-child").removeClass("disabled");
+		pc.loadData(currentYear.toString());
+	}
+	$("#current-year-label").text(currentYear.toString());
+}

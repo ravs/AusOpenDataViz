@@ -4,9 +4,7 @@ html {
 html,body {
 	margin:0;
 	padding:0;
-
 	height: 100%;
-
 	font-family: 'Open Sans', sans-serif;
 	font-weight: 300;
 	background: #E2F6FF; /* Old browsers */
@@ -31,19 +29,27 @@ a:hover {
 	color:#A06535;
 }
 #header {
-	width:80%;
+	width:100%;
 	min-width: 960px;
-	margin:0 auto 10px;
+	margin:0 auto 50px;
 	padding-bottom:5px;
 	position: relative;
+	background-color: #3498db;
+	height: 50px;
+}
+#header img {
+	float: left;
+	padding-left: 4%;
 }
 #header h1 {
 	font-size: 23px;
-	color:#A06535;
+	color:#fff;
 	font-weight: 400;
 	margin:0;
 	text-align: center;
-	padding: 0;
+	padding: 12px 0;
+	left: -8%;
+	position: relative;
 }
 #header h1 b{
 	font-weight: 700;

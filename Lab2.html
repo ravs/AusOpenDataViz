@@ -107,7 +107,7 @@ body {
 					"transform",
 					"translate(" + margin.left + "," + margin.top + ")");
 
-			d3.tsv("tennis.tsv", function(error, data) {
+			d3.tsv("data/tennis.tsv", function(error, data) {
 				data.forEach(function(d) {
 					d.winners = +d.winners;
 					d.errors = +d.errors;
@@ -172,7 +172,7 @@ body {
 					"transform",
 					"translate(" + margin.left + "," + margin.top + ")");
 
-			d3.tsv("tennis.tsv", function(error, data) {
+			d3.tsv("data/tennis.tsv", function(error, data) {
 				data.forEach(function(d) {
 					d.winners = +d.winners;
 					d.errors = +d.errors;

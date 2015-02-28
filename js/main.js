@@ -81,13 +81,13 @@ d3.csv("data/PlayerStat2014.csv",function(d){
 			dimensions:["MatchesPlayed","TotalPointsWon","WinEvent","ErrorEvent","AceEvent","DoubleEvent","round","name"],
 			column_map:{
 				"name":["Player","Name"],
-				"WinEvent":["Win per","Match"],
+				"WinEvent":["Wins per","Match"],
 				"TotalPointsWon":["Total Points","Won"],
 				"MatchesPlayed":["Matches","Played"],
 				"round":["Matches","Won"],
-				"ErrorEvent":["Error per","Match"],
+				"ErrorEvent":["Errors per","Match"],
 				"AceEvent":["Aces per","Match"],
-				"DoubleEvent":["Double Fault","per Match"]
+				"DoubleEvent":["Double Faults","per Match"]
 			},
 			help:{
 				"name":"<h4>Player Name</h4>Top performering players in a given year in AUS Open<br/>(Ordered by total points won).",

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="chrome=1" />
+	<meta name="viewport" content="width=device-width, initial-scale = 1.0, maximum-scale=1.0, user-scalable=yes" />
+	<title>CSE591DataViz : Visual representation of 10 years of players stats in AUS Open</title>
+	<link rel="stylesheet" href="css/pc.css">
+	<link rel="stylesheet" href="css/sm.css">
+	<link rel="stylesheet" href="css/lc.css">
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<script src="js/jquery-2.1.3.min.js" charset="utf-8"></script>
+	<script src="js/bootstrap.min.js" charset="utf-8"></script>
+	<script>window.d3||document.write('<script src="js/d3.min.js"><\/script>');</script>
+</head>
+<body>
+	<div id="wrapper">
+		<div id="header">
+			<img src="img/ausopen_logo.png">
+			<h1>Australian Open Player Statistics 2004 - 2014 </h1>
+			<div class="links">
+				<a href="/">Home</a>
+				<a href="/Lab2.html">Lab2</a>
+				<a class="active" href="/WriteUp.html">Write Up</a>
+			</div>
+		</div>
+		<div class="container">
+			<h2 style="text-align: center; text-transform: uppercase; padding-bottom: 20px;">Assignment 2 Write up</h2>
+			<div class="title">Story</div>
+			<div class="desc">
+				Given the 10 years of statistics of all the matches played in Australian Open, <i>can we treasure out a pattern of the grand slam winners?
+				Is there a general trend seen in all the Australian Open for past 10 years?</i> <br>
+				I started working on this assignment with these simple questions. After doing the initial analysis, I saw that we do have a general trend 
+				seen every year. Win are the most important (thats kind of obvious), while aces are not an important asset when it comes to win the grand slam.
+				The grand slam winner of each year displayed the consistent pattern, high wins, high wins per match, low errors per match, low double faults per match 
+				and average aces per match. 
+			</div>
+			<div class="title">Data Processing</div>
+			<div class="desc">
+				I started off with the csv data being provided and converted it to JSON format (due to my personal preference). I used an open source web application 
+				<a href="http://www.convertcsv.com/csv-to-json.htm">CSV To JSON Converter</a> to convert CSV to JSON format.
+				I wrote JavaScript script <a href="https://github.com/ravs/AusOpenDataViz/blob/master/dataprocessing/FormatData.js">FormatData.js</a> to process the data.  
+				I stored the intermediate data in  JSON files, PlayerStatYYYY.json and AUSOpeYYYY.json.
+				I used my personal web application <a href="http://ravs.me/json2csv/">json2csv</a> for converting the intermediate JSON file to CSV file.
+				<br><br>
+				<i><a href="https://github.com/ravs/AusOpenDataViz/blob/master/data/PlayerStat2004.csv">PlayerStatYYYY.csv</a></i><br>
+				<div style="padding-left: 20px;">In PlayerStat file, I stored the name and the round to which they progressed through (number of matches won) of all the players played in that 
+				particular year.</div>
+				<br>
+				<i><a href="https://github.com/ravs/AusOpenDataViz/blob/master/data/AUSOpen2004.csv">AUSOpenYYYY.csv</a></i><br>
+				<div style="padding-left: 20px;">In AUSOpen file, I stored the data based on the various events : {WinEvent,ErrorEvent, DoubleEvent, AceEvent}, along with the number of matches
+				played.</div>
+				<br>
+				<i>Event Descriptions</i>:
+				<ul>
+					<li>WinEvent: Number of winners in the entire championship</li>
+					<li>ErrorEvent: Number of errors in the entire championship</li>
+					<li>DoubleEvent: Number of doubles in the entire championship</li>
+					<li>AceEvent: Number of aces in the entire championship</li>
+				</ul>
+			</div>
+			<div class="title">Interactions</div>
+			<div class="desc">
+				The players are ordered in the descending order of the number of points won (winner) by the player in the entire championship.
+				Following are the interactions implemented in the visualization:
+				<ul>
+					<li>Yearly Visualization</li>
+					<span>
+						Viewers can go back to previous year and return to recent years by clicking the buttons 'Older' and 'Newer'. Visualization changes 
+						dynamically, and the changes in the players column are highlighted using different color.
+					</span>
+					<li>Hover Event</li>
+					<span>
+						Viewers can hover over the player to see their performance in the championship. The data pertaining to the selected player is highlighted
+						and connected through a line to distinctly display the data.
+						<br>
+						Viewers can hover over the column title to know more about the column detail.
+					</span>
+					<li>Click Event</li>
+					<span>
+						Clicking on any player displays the statistics of the selected player in black color. This effect allows user to compare multiple players
+						performances. Viewer can revert back by clicking the previously selected player. 
+					</span>
+				</ul>
+			</div>
+			<div class="title">Tools and reference</div>
+			<div class="desc">
+				<ol>
+					<li><a href="d3js.org">d3.js</a></li>
+					<span>d3.js JavaScript framework for manipulating documents based on data.</span>
+					<li>HTML, CSS, JavaScript</li>
+					<span>Used for front end design and implementations.</span>
+					<li><a href="http://www.nodejs.org/">Nodejs</a></li>
+					<span>Used for running JS script for data processing.</span>
+					<li><a href="http://githut.info/">Githut.info</a></li>
+					<span>Used as the base design for visualizing the story.</span>
+					<li><a href="http://getbootstrap.com/">Bootstrap</a></li>
+					<span>Used for the layouts and css components.</span>
+				</ol>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

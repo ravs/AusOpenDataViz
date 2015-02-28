@@ -48,7 +48,7 @@ a:hover {
 	margin:0;
 	text-align: center;
 	padding: 12px 0;
-	left: 15%;
+	left: 18%;
 	position: relative;
 	float: left;
 }
@@ -65,10 +65,13 @@ a:hover {
 #header a {
 	color: #fff;
 	text-decoration: none;
+	margin-right: 20px;
 }
 
-#header a:first-child {
-	padding-right: 20px;
+#header .active {
+	border-bottom: 3px solid #fff;
+	cursor: default;
+	padding-bottom: 2px;
 }
 
 #header h1 b{
@@ -82,6 +85,15 @@ a:hover {
 	text-align: center;
 	padding: 0;
 	text-transform: uppercase;
+}
+.container .title {
+	font-size: 24px;
+	text-decoration: overline;
+	text-transform: uppercase;
+}
+.container .desc {
+	font-size: 18px;
+	padding-bottom: 25px;
 }
 #pc {
 	width:80%;

@@ -19,9 +19,21 @@ body {
 </style>
 </head>
 <body>
-	<div style="left: 40%; position: relative;">
-		<button onclick="byPlayer();">By player</button>
-		<button onclick="byResult();">By result</button>
+	<div id="wrapper">
+		<div id="header">
+			<img src="img/ausopen_logo.png">
+			<h1>Australian Open Player Statistics 2004 - 2014 </h1>
+			<div class="links">
+				<a href="/">Home</a>
+				<a class="active" href="/Lab2.html">Lab2</a>
+				<a href="/WriteUp.html">Write Up</a>
+			</div>
+		</div>
+		
+		<div style="left: 40%; position: relative;">
+			<button onclick="byPlayer();">By player</button>
+			<button onclick="byResult();">By result</button>
+		</div>
 	</div>
 	<script src="http://d3js.org/d3.v3.min.js"></script>
 	<script>

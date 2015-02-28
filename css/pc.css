@@ -421,11 +421,11 @@ a:hover {
 
 @font-face {
   font-family: 'gh';
-  src: url('gh.eot');
-  src: url('gh.eot') format('embedded-opentype'),
-       url('gh.woff') format('woff'),
-       url('gh.ttf') format('truetype'),
-       url('gh.svg') format('svg');
+  src: url('../font/gh.eot');
+  src: url('../font/gh.eot') format('embedded-opentype'),
+       url('../font/gh.woff') format('woff'),
+       url('../font/gh.ttf') format('truetype'),
+       url('../font/gh.svg') format('svg');
   font-weight: normal;
   font-style: normal;
 }

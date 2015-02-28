@@ -57,7 +57,7 @@
 		var yAxis = d3.svg.axis().scale(y).orient("left");
 		var svg = d3.select("body").append("svg").attr("width",
 				width + margin.left + margin.right).attr("height",
-				height + margin.top + margin.bottom).append("g").attr(
+				height + margin.top + margin.bottom).attr("left", "10%").attr("position","relative").append("g").attr(
 				"transform",
 				"translate(" + margin.left + "," + margin.top + ")");
 		d3.tsv("data/tennis.tsv", function(error, data) {
@@ -119,7 +119,7 @@
 			var yAxis = d3.svg.axis().scale(y).orient("left");
 			var svg = d3.select("body").append("svg").attr("width",
 					width + margin.left + margin.right).attr("height",
-					height + margin.top + margin.bottom).append("g").attr(
+					height + margin.top + margin.bottom).attr("left", "10%").attr("position","relative").append("g").attr(
 					"transform",
 					"translate(" + margin.left + "," + margin.top + ")");
 
@@ -184,7 +184,7 @@
 			var yAxis = d3.svg.axis().scale(y).orient("left");
 			var svg = d3.select("body").append("svg").attr("width",
 					width + margin.left + margin.right).attr("height",
-					height + margin.top + margin.bottom).append("g").attr(
+					height + margin.top + margin.bottom).attr("left", "10%").attr("position","relative").append("g").attr(
 					"transform",
 					"translate(" + margin.left + "," + margin.top + ")");
 
